@@ -1,25 +1,36 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope,$http,$filter) {
+.controller('DashCtrl', function($scope,$http) {
     $scope.getData = function(){
   var url = "https://search-proxy.spredfast.com/search.json?q=junglebook&filter.start=-1d&filter.finish=0&view.entities.limit=500";
   $http.get(url).success(function(data){
+        console.log(data);
     var data = data.views.entities.data;
     $scope.datas = [];
+    $scope.mediaDatas = [];
     var listdata = [];
     var media = [];
+    var mediaData = [];
     for (var i = 0; i < data.length; i++) {
       listdata.push({
-        tweet : data[i].raw.text,
-        imgUrl : data[i].raw.user.profile_image_url,
+              tweet : data[i].raw.text,
+              imgUrl : data[i].raw.user.profile_image_url,
+            });
+      if (data[i].raw.extended_entities ) {
+          var media = data[i].raw.extended_entities.media  
+          console.log(media);
+          for (var j = 0; j < media.length; j++) {
+            listdata.push({
+              id : i,
+              mediaUrl : media[j].media_url
         });
-         media.push = data[i].raw.extended_entities
+          }
+      }else{
     }
-
+  }
     $scope.datas = listdata;
-    $scope.media = media;
-    console.log(data);
-      
+    $scope.mediaDatas = mediaData;
+    console.log($scope.datas);
   });
 }
 })
