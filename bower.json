@@ -3,5 +3,9 @@
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.2.4"
+  },
+  "dependencies": {
+    "angular-linkify": "^1.2.0",
+    "angular-chart.js": "^0.10.0"
   }
 }

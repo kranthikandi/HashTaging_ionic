@@ -1,7 +1,7 @@
 <ion-view view-title="Dashboard">
 <ion-nav-title>
     <form ng-submit="getData()">
-<div class="bar bar-header item-input-inset headers">
+<div class="bar bar-header bar-positive item-input-inset headers">
   <label class="item-input-wrapper">
     <i class="icon ion-ios-search placeholder-icon"></i>
     <input type="text" placeholder="Search"  class="input" name="q"  id= "city">
@@ -9,18 +9,26 @@
 </div>
 </form>
 </ion-nav-title>
- <ion-header-bar class="bar-subheader bar-assertive">
-  <div class="button-bar">
-            <button id="page2-button10" class="button button-positive  button-block">Feeds</button>
-            <button id="page2-button11" class="button button-positive  button-block">Media</button>
-        </div>             
-  </ion-header-bar>
-  <ion-content class="padding">
-    <h2>Welcome to Ionic</h2>
-    <div ng-repeat="data in datas">
-    <img src="{{data.imgUrl}}">
-    <p>{{data.tweet}}</p>
-    <!-- <img src="{{data.media}}"> -->
-    </div>
+<ion-header-bar class="bar-subheader">
+<div class="tabs border divclass">
+              <a ng-click="" class="tab-item subfont1" >
+                Feeds
+              </a>
+              <a ng-click="" class="tab-item subfont2" >
+                Media
+              </a>
+</div>
+                      
+  </ion-header-bar>
+  <ion-content class="has-header has-subheader paddingcontent">
+<ion-list  can-swipe="true" ng-repeat="data in datas">
+    <ion-item href="#">
+        <div class="row">
+          <div><img ng-src="{{data.imgUrl}}" ></div>
+          &nbsp; &nbsp; &nbsp;
+          </div>
+          <div><pre class="namesize" ng-bind-html="data.tweet|linky">{{data.tweet}}</pre></div>
+</ion-item>
+ </ion-list>
   </ion-content>
 </ion-view>
