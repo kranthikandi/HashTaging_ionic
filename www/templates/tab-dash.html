@@ -30,7 +30,9 @@
           <div><pre class="namesize" ng-bind-html="data.tweet|linky">{{data.tweet}}
           </pre>
           </div>
-          <div><img ng-src="{{data.mediaUrl}}" ></div>
+          <div> <!-- <figure ng-repeat="imageUrl in datas" class="col-xs-4 col-sm-3 col-md-3 col-lg-2" > -->
+            <img ng-src="{{data.mediaUrl}}" />
+        <!-- </figure> --></div>
 </ion-item>
  </ion-list>
   </ion-content>

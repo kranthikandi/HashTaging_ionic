@@ -4,7 +4,7 @@ angular.module('starter.controllers', [])
     $scope.getData = function(){
   var url = "https://search-proxy.spredfast.com/search.json?q=junglebook&filter.start=-1d&filter.finish=0&view.entities.limit=500";
   $http.get(url).success(function(data){
-   //     console.log(data);
+        console.log(data);
     var data = data.views.entities.data;
     $scope.datas = [];
     $scope.mediaDatas = [];
@@ -12,20 +12,24 @@ angular.module('starter.controllers', [])
     var media = [];
     var mediaData = [];
     for (var i = 0; i < data.length; i++) {
-      listdata.push({
+      if (data[i].raw.extended_entities ) {
+          var media = data[i].raw.extended_entities.media;
+          var imgDiv = ""; 
+          
+          for (var j = 0; j < media.length; j++) {
+           // imgDiv = imgDiv+""+media[j].media_url+"<br>";
+console.log(media.length);
+                      listdata.push({
+              tweet : data[i].raw.text,
+              imgUrl : data[i].raw.user.profile_image_url,
+              mediaUrl : media[j].media_url
+        });
+                    }
+      }else{
+            listdata.push({
               tweet : data[i].raw.text,
               imgUrl : data[i].raw.user.profile_image_url,
             });
-      if (data[i].raw.extended_entities ) {
-          var media = data[i].raw.extended_entities.media  
-          console.log(media);
-          for (var j = 0; j < media.length; j++) {
-            listdata.push({
-              id : i,
-              mediaUrl : media[j].media_url
-        });
-          }
-      }else{
     }
   }
     $scope.datas = listdata;
